@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <color name="colorPrimary">#135e7e</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">@color/grayDarker</color>
+    <color name="grayBTN">#a2a2a2</color>
+    <color name="grayLight">#c4c4c4</color>
+    <color name="darkBlue">#19769f</color>
+    <color name="darkLeftStatusBar">#135e7e</color>
+    <color name="rightGreen">#30cda4</color>
+    <color name="rightGreenStatusBar">#25a182</color>
+    <color name="greenBTN">#079da8</color>
+    <color name="greenBTNBorder">#0cbdca</color>
+    <color name="gray">#dcdcdc</color>
+    <color name="grayDarker">#7e7e7e</color>
+    <color name="transparent">#00000000</color>
+    <color name="white">#fff</color>
+    <color name="black">#000</color>
+    <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">@color/grayLight</color>
+    <color name="redError">#f44f4f</color>
+    <color name="orange">#f49c03</color>
+    <!--android:foreground="?android:attr/selectableItemBackground"-->
+    <!--android:clickable="true"-->
+</resources>
