@@ -10,6 +10,7 @@
     <color name="rightGreen">#30cda4</color>
     <color name="rightGreenStatusBar">#25a182</color>
     <color name="greenBTN">#079da8</color>
+    <color name="redBTN">#A80707</color>
     <color name="greenBTNBorder">#0cbdca</color>
     <color name="gray">#dcdcdc</color>
     <color name="grayDarker">#7e7e7e</color>

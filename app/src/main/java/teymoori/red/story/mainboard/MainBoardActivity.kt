@@ -30,6 +30,7 @@ class MainBoardActivity : BaseActivity(), MainBoardListAdapter.StoryClickItem {
         })
 
     override fun onStorySelect(story: StoryModel) {
-        startActivity(Intent(mActivity, ChatBoardActivity::class.java))
+        val intentMessages = Intent(mActivity, ChatBoardActivity::class.java).putExtra("story", story)
+        startActivity(intentMessages)
     }
 }

@@ -11,5 +11,6 @@ data class StoryModel(
     val lang: String?,
     val poster_address: String?,
     val stars: String?,
+    val background: String?,
     val title: String?
 ): Parcelable
