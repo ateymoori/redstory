@@ -8,7 +8,9 @@ import kotlinx.android.synthetic.main.activity_main_board.*
 import teymoori.red.story.R
 import teymoori.red.story.chatbaord.ChatBoardActivity
 import teymoori.red.story.utils.base.BaseActivity
+import teymoori.red.story.utils.base.RestHandler
 import teymoori.red.story.utils.entities.StoryModel
+import teymoori.red.story.utils.toastError
 
 class MainBoardActivity : BaseActivity(), MainBoardListAdapter.StoryClickItem {
 
@@ -20,14 +22,24 @@ class MainBoardActivity : BaseActivity(), MainBoardListAdapter.StoryClickItem {
         observeStories(viewModel)
     }
 
-    private fun observeStories(viewModel: MainViewModel) =
+    private fun observeStories(viewModel: MainViewModel) {
         viewModel.getStories().observe(this, Observer {
-            if (it != null) {
-                val adapter = MainBoardListAdapter(it)
-                results.adapter = adapter
-                adapter.storyClickHandler = this
+            when (it?.status) {
+                RestHandler.Status.LOADING -> loading(true)
+                RestHandler.Status.ERROR -> {
+                    it.exception?.toastError();
+                    loading(false)
+                }
+                RestHandler.Status.SUCCESS -> {
+                    loading(false)
+                    val adapter = it.data?.let { items -> MainBoardListAdapter(items) }
+                    results.adapter = adapter
+                    adapter?.storyClickHandler = this
+                }
             }
         })
+
+    }
 
     override fun onStorySelect(story: StoryModel) {
         val intentMessages = Intent(mActivity, ChatBoardActivity::class.java).putExtra("story", story)

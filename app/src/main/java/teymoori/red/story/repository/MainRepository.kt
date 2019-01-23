@@ -6,6 +6,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import teymoori.red.story.utils.RxDisposableManager
 import teymoori.red.story.utils.base.RestClient
+import teymoori.red.story.utils.base.RestHandler
 import teymoori.red.story.utils.entities.MessageModel
 import teymoori.red.story.utils.entities.StoryModel
 
@@ -14,14 +15,14 @@ class MainRepository {
         val instance = MainRepository()
     }
 
-    fun getStories(): LiveData<List<StoryModel>> {
-        val data: MutableLiveData<List<StoryModel>> = MutableLiveData();
+    fun getStories(): LiveData<RestHandler<List<StoryModel>>> {
+        val data: MutableLiveData<RestHandler<List<StoryModel>>> = MutableLiveData();
         val disposable = RestClient.service(true).getStories().observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io()).subscribe({ result ->
                 if (result.isSuccessful) {
                     if (result.body() != null) {
                         result.body()?.let {
-                            data.value = it
+                            data.value = RestHandler.success(it)
                         }
                     } else
                         failed("")
@@ -36,19 +37,18 @@ class MainRepository {
 
 
     private fun failed(error: String?) {
-
+        RestHandler.error<String>(error)
     }
 
 
-
-    fun getMessages(story_id:String): LiveData<MutableList<MessageModel>> {
-        val data: MutableLiveData<MutableList<MessageModel>> = MutableLiveData();
+    fun getMessages(story_id: String): LiveData<RestHandler<MutableList<MessageModel>>> {
+        val data: MutableLiveData<RestHandler<MutableList<MessageModel>>> = MutableLiveData();
         val disposable = RestClient.service(true).getMessages(story_id).observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io()).subscribe({ result ->
                 if (result.isSuccessful) {
                     if (result.body() != null) {
                         result.body()?.let {
-                            data.value = it
+                            data.value = RestHandler.success(it)
                         }
                     } else
                         failed("")
@@ -60,7 +60,6 @@ class MainRepository {
         RxDisposableManager.getCompositeDisposable().add(disposable)
         return data
     }
-
 
 
 }

@@ -15,6 +15,10 @@ import android.view.MotionEvent
 import android.support.v7.widget.RecyclerView
 import teymoori.red.story.utils.log
 import android.support.v7.widget.DefaultItemAnimator
+import teymoori.red.story.mainboard.MainBoardListAdapter
+import teymoori.red.story.mainboard.MainViewModel
+import teymoori.red.story.utils.base.RestHandler
+import teymoori.red.story.utils.toastError
 
 
 class ChatBoardActivity : BaseActivity(), MessageBoardListAdapter.MessageClickItem {
@@ -55,11 +59,22 @@ class ChatBoardActivity : BaseActivity(), MessageBoardListAdapter.MessageClickIt
         }
     }
 
-    private fun observeMessages(viewModel: ChatBoardViewModel, story_id: String) =
+    private fun observeMessages(viewModel: ChatBoardViewModel, story_id: String) {
         viewModel.getMessages(story_id).observe(this, Observer {
-            if (it != null) {
-                messages = it
-                addItem()
+            when (it?.status) {
+                RestHandler.Status.LOADING -> loading(true)
+                RestHandler.Status.ERROR -> {
+                    it.exception?.toastError();
+                    loading(false)
+                }
+                RestHandler.Status.SUCCESS -> {
+                    loading(false)
+                    messages = it.data!!
+                    addItem()
+                }
             }
         })
+
+    }
+
 }
