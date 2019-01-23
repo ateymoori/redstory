@@ -15,7 +15,7 @@ interface RestAPI {
 
     @GET("messages.php")
     fun getMessages(@Query("story_id") story_id: String):
-            Observable<Response<List<MessageModel>>>
+            Observable<Response<MutableList<MessageModel>>>
 
 
 }

@@ -2,13 +2,15 @@
 <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/container"
         android:layout_width="match_parent"
+        android:clickable="true"
         android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
         tools:context=".chatbaord.ChatBoardActivity">
 
     <ImageView
             android:id="@+id/bg"
-            android:src="@drawable/cover"
+            android:clickable="true"
             android:scaleType="centerCrop"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>

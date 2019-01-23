@@ -41,8 +41,8 @@ class MainRepository {
 
 
 
-    fun getMessages(story_id:String): LiveData<List<MessageModel>> {
-        val data: MutableLiveData<List<MessageModel>> = MutableLiveData();
+    fun getMessages(story_id:String): LiveData<MutableList<MessageModel>> {
+        val data: MutableLiveData<MutableList<MessageModel>> = MutableLiveData();
         val disposable = RestClient.service(true).getMessages(story_id).observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io()).subscribe({ result ->
                 if (result.isSuccessful) {

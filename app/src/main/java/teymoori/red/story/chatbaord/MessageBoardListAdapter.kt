@@ -16,12 +16,18 @@ import android.view.Gravity
 import teymoori.red.story.utils.base.MyApplication
 
 
-class MessageBoardListAdapter(val items: List<MessageModel>) : RecyclerView.Adapter<MessageBoardListAdapter.Holder>() {
+class MessageBoardListAdapter(var items: MutableList<MessageModel>) :
+    RecyclerView.Adapter<MessageBoardListAdapter.Holder>() {
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): Holder {
         return Holder(LayoutInflater.from(parent.context).inflate(R.layout.message_item, parent, false))
-            .listen { pos, _ ->
-                // messageClickHandler.onMessageSelect(items[pos])
-            }
+//            .listen { pos, _ ->
+//               messageClickHandler.onMessageSelect(items[pos])
+//            }
+    }
+
+    fun addItem(item: MessageModel) {
+        items.add(item)
+        notifyDataSetChanged()
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {

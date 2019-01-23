@@ -23,11 +23,8 @@ class MainBoardListAdapter (val items: List<StoryModel>) : RecyclerView.Adapter<
     override fun onBindViewHolder(holder: Holder, position: Int) {
         holder.title.text = items[position].title
         holder.by.text = "Amir"
-        holder.cover.loadFromURL(items[position].poster_address)
-//        if (items[position].status.toLowerCase() == "approved")
-//            holder.invoiceStatus.labelBackgroundColor = Gen.getColorRes(R.color.greenBTN)
-//        else
-//            holder.invoiceStatus.labelBackgroundColor = Gen.getColorRes(R.color.orange)
+      //  holder.cover.loadFromURL(items[position].poster_address)
+
     }
 
     override fun getItemCount(): Int {
