@@ -2,9 +2,8 @@ package teymoori.red.story.utils.customViews;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.support.constraint.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import android.util.AttributeSet;
-import android.widget.LinearLayout;
 
 import com.lid.lib.LabelViewHelper;
 

@@ -6,7 +6,7 @@
 
     <ImageView
             android:id="@+id/cover"
-
+            android:alpha="0.2"
             android:layout_width="match_parent"
             android:scaleType="centerCrop"
             android:layout_height="300dp"/>

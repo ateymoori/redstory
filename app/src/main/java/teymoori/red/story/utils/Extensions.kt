@@ -1,7 +1,7 @@
 package teymoori.red.story.utils
 
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.RecyclerView
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.widget.ImageView
 import com.bumptech.glide.Glide
@@ -17,6 +17,9 @@ fun String.toastError() {
 
 fun String.log() {
     Gen.log(this)
+}
+fun String.log(msg:String) {
+    Gen.log(msg + this)
 }
 
 fun String.isEmail(): Boolean {
@@ -36,7 +39,7 @@ fun ImageView.config(img: Int, event: (Any) -> Unit) {
 }
 
 
-fun <T : RecyclerView.ViewHolder> T.listen(event: (position: Int, type: Int) -> Unit): T {
+fun <T : androidx.recyclerview.widget.RecyclerView.ViewHolder> T.listen(event: (position: Int, type: Int) -> Unit): T {
     itemView.setOnClickListener {
         event.invoke(adapterPosition, itemViewType)
     }

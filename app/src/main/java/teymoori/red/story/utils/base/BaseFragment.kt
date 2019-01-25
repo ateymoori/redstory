@@ -1,9 +1,9 @@
 package teymoori.red.story.utils.base
 
 import android.content.Context
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 
-open class BaseFragment : Fragment() {
+open class BaseFragment : androidx.fragment.app.Fragment() {
 
     fun getCTX(): Context {
         return activity ?: MyApplication.appInstance.applicationContext

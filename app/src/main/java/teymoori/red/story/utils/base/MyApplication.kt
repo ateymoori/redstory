@@ -2,7 +2,7 @@ package teymoori.red.story.utils.base
 
 import android.app.Application
 import android.graphics.Color
-import android.support.v4.content.ContextCompat
+import androidx.core.content.ContextCompat
 import com.orhanobut.hawk.Hawk
 
 import es.dmoral.toasty.Toasty

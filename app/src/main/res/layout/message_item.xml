@@ -19,16 +19,29 @@
                 android:textColor="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
-        <teymoori.red.story.utils.customViews.MyTextView
+        <RelativeLayout
                 android:layout_width="wrap_content"
-                android:gravity="center"
-                android:background="@drawable/rounded_green"
-                android:id="@+id/message"
-                android:textColor="@color/white"
-                android:padding="8dp"
-                android:text="Hey Julia how are you"
-                android:textSize="@dimen/_12ssp"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content">
+
+            <teymoori.red.story.utils.customViews.MyTextView
+                    android:layout_width="wrap_content"
+                    android:gravity="center"
+                    android:background="@drawable/rounded_green"
+                    android:id="@+id/message"
+                    android:textColor="@color/white"
+                    android:padding="8dp"
+                    android:text="Hey Julia how are you"
+                    android:textSize="@dimen/_12ssp"
+                    android:layout_height="wrap_content"/>
+
+            <ImageView
+                    android:id="@+id/image"
+                    android:layout_width="300dp"
+                    android:visibility="gone"
+                    android:scaleType="centerCrop"
+                    android:layout_height="300dp"/>
+
+        </RelativeLayout>
 
 
     </LinearLayout>

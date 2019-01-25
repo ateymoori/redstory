@@ -5,7 +5,7 @@ import android.app.Activity
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.support.v7.app.AlertDialog
+import androidx.appcompat.app.AlertDialog
 import android.view.KeyEvent
 import android.view.View
 import teymoori.red.story.R

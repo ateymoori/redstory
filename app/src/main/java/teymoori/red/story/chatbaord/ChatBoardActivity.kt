@@ -1,35 +1,24 @@
 package teymoori.red.story.chatbaord
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.view.ViewGroup
 import kotlinx.android.synthetic.main.activity_chat_board.*
 import teymoori.red.story.R
 import teymoori.red.story.utils.base.BaseActivity
 import teymoori.red.story.utils.entities.MessageModel
 import teymoori.red.story.utils.entities.StoryModel
 import teymoori.red.story.utils.loadFromURL
-import teymoori.red.story.utils.toast
 import android.view.MotionEvent
-import android.support.v7.widget.RecyclerView
-import teymoori.red.story.utils.log
-import android.support.v7.widget.DefaultItemAnimator
-import teymoori.red.story.mainboard.MainBoardListAdapter
-import teymoori.red.story.mainboard.MainViewModel
+import androidx.recyclerview.widget.RecyclerView
 import teymoori.red.story.utils.base.RestHandler
 import teymoori.red.story.utils.toastError
 
-
 class ChatBoardActivity : BaseActivity(), MessageBoardListAdapter.MessageClickItem {
-    override fun onMessageSelect(story: MessageModel) {
-        // addItem()
-    }
-
     lateinit var story: StoryModel
-    lateinit var adapter: MessageBoardListAdapter
-    var messages: MutableList<MessageModel> = mutableListOf<MessageModel>()
-    var lastItemReleased = 0;
+    private lateinit var adapter: MessageBoardListAdapter
+    private var messages: MutableList<MessageModel> = mutableListOf()
+    private var lastItemReleased = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,17 +27,19 @@ class ChatBoardActivity : BaseActivity(), MessageBoardListAdapter.MessageClickIt
         bg.loadFromURL(story.background)
         val viewModel = ViewModelProviders.of(this).get(ChatBoardViewModel::class.java)
         observeMessages(viewModel, story.id)
-
-        "page".toast()
         adapter = MessageBoardListAdapter(messages)
+
+        results.addOnScrollListener(CustomScrollHandler())
         results.adapter = adapter
-        results.itemAnimator = DefaultItemAnimator()
-        results.addOnItemTouchListener(object : RecyclerView.SimpleOnItemTouchListener() {
-            override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
-                if (e.action == MotionEvent.ACTION_DOWN)
-                    addItem()
-                return true
+        results.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
+        results.addOnItemTouchListener(object : androidx.recyclerview.widget.RecyclerView.SimpleOnItemTouchListener() {
+            override fun onInterceptTouchEvent(rv: androidx.recyclerview.widget.RecyclerView, e: MotionEvent): Boolean {
+                if (e.action == MotionEvent.ACTION_UP)
+                    if (!scrolling)
+                        addItem()
+                return false
             }
+
         })
     }
 
@@ -56,6 +47,7 @@ class ChatBoardActivity : BaseActivity(), MessageBoardListAdapter.MessageClickIt
         if (lastItemReleased < messages.size) {
             adapter.addItem(messages[lastItemReleased])
             lastItemReleased++
+            results.scrollToPosition(adapter.itemCount - 1)
         }
     }
 
@@ -64,7 +56,7 @@ class ChatBoardActivity : BaseActivity(), MessageBoardListAdapter.MessageClickIt
             when (it?.status) {
                 RestHandler.Status.LOADING -> loading(true)
                 RestHandler.Status.ERROR -> {
-                    it.exception?.toastError();
+                    it.exception?.toastError()
                     loading(false)
                 }
                 RestHandler.Status.SUCCESS -> {
@@ -74,7 +66,28 @@ class ChatBoardActivity : BaseActivity(), MessageBoardListAdapter.MessageClickIt
                 }
             }
         })
-
     }
 
+    companion object {
+        var scrolling = false
+    }
+
+    class CustomScrollHandler : RecyclerView.OnScrollListener() {
+        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+            when (newState) {
+                RecyclerView.SCROLL_STATE_IDLE -> {
+                    scrolling = false
+                }
+                RecyclerView.SCROLL_STATE_DRAGGING -> {
+                    scrolling = true
+                }
+                RecyclerView.SCROLL_STATE_SETTLING -> {
+                }
+            }
+        }
+    }
+
+    override fun onMessageSelect(story: MessageModel) {
+        // addItem()
+    }
 }

@@ -1,7 +1,7 @@
 package teymoori.red.story.customViews
 
 import android.content.Context
-import android.support.v7.widget.AppCompatEditText
+import androidx.appcompat.widget.AppCompatEditText
 import android.util.AttributeSet
 import java.util.jar.Attributes
 

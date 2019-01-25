@@ -1,7 +1,7 @@
 package teymoori.red.story.mainboard
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_main_board.*

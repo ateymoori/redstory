@@ -1,7 +1,7 @@
 package teymoori.red.story.mainboard
 
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.LiveData
 import teymoori.red.story.repository.MainRepository
 import teymoori.red.story.utils.base.RestHandler
 import teymoori.red.story.utils.entities.MessageModel

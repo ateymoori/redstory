@@ -1,6 +1,6 @@
 package teymoori.red.story.mainboard
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +12,7 @@ import teymoori.red.story.utils.entities.StoryModel
 import teymoori.red.story.utils.listen
 import teymoori.red.story.utils.loadFromURL
 
-class MainBoardListAdapter (val items: List<StoryModel>) : RecyclerView.Adapter<MainBoardListAdapter.Holder>() {
+class MainBoardListAdapter (val items: List<StoryModel>) : androidx.recyclerview.widget.RecyclerView.Adapter<MainBoardListAdapter.Holder>() {
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): Holder {
         return Holder(LayoutInflater.from(parent.context).inflate(R.layout.stories_board_item, parent, false))
             .listen { pos, _ ->
@@ -23,7 +23,7 @@ class MainBoardListAdapter (val items: List<StoryModel>) : RecyclerView.Adapter<
     override fun onBindViewHolder(holder: Holder, position: Int) {
         holder.title.text = items[position].title
         holder.by.text = "Amir"
-      //  holder.cover.loadFromURL(items[position].poster_address)
+        holder.cover.loadFromURL(items[position].poster_address)
 
     }
 
@@ -32,7 +32,7 @@ class MainBoardListAdapter (val items: List<StoryModel>) : RecyclerView.Adapter<
     }
 
 
-    class Holder(private val view: View) : RecyclerView.ViewHolder(view) {
+    class Holder(private val view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
         val title: MyTextView = view.title
         val by: MyTextView = view.by
         val cover: ImageView = view.cover
