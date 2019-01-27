@@ -24,9 +24,13 @@ class ChatBoardActivity : BaseActivity(), MessageBoardListAdapter.MessageClickIt
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_board)
         story = intent.getParcelableExtra("story")
+
         bg.loadFromURL(story.background)
         val viewModel = ViewModelProviders.of(this).get(ChatBoardViewModel::class.java)
-        observeMessages(viewModel, story.id)
+
+        observeMessages(viewModel, "1")
+      //  observeMessages(viewModel, story.id)
+
         adapter = MessageBoardListAdapter(messages)
         storyTitle.text = story.title
         results.addOnScrollListener(CustomScrollHandler())

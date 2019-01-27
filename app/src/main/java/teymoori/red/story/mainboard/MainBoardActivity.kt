@@ -14,15 +14,17 @@ import androidx.recyclerview.widget.GridLayoutManager
 import teymoori.red.story.R
 
 
-
-
 class MainBoardActivity : BaseActivity(), MainBoardListAdapter.StoryClickItem {
 
+    private lateinit var viewModel: MainViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_board)
+        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+    }
 
-        val viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+    override fun onResume() {
+        super.onResume()
         observeStories(viewModel)
     }
 
@@ -42,7 +44,7 @@ class MainBoardActivity : BaseActivity(), MainBoardListAdapter.StoryClickItem {
                     val gridLayoutManager = GridLayoutManager(mContext, 2)
                     gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                         override fun getSpanSize(position: Int): Int {
-                            return  (if (position % 5 == 0) 2 else 1)
+                            return (if (position % 5 == 0) 2 else 1)
                         }
 
                     }

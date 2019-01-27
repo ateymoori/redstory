@@ -51,6 +51,7 @@
                 android:id="@+id/storyTitle"
                 android:layout_centerHorizontal="true"
                 android:textSize="@dimen/_14ssp"
+                android:gravity="center|top"
                 android:layout_marginTop="8dp"
                 android:ems="11"
                 android:textColor="@color/white"

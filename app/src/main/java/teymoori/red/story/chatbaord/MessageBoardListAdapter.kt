@@ -12,6 +12,7 @@ import teymoori.red.story.utils.customViews.MyTextView
 import teymoori.red.story.utils.entities.MessageModel
 import android.view.Gravity
 import android.widget.ImageView
+import android.widget.RelativeLayout
 import com.makeramen.roundedimageview.RoundedImageView
 import teymoori.red.story.utils.base.MyApplication
 import teymoori.red.story.utils.loadFromURL
@@ -47,8 +48,8 @@ class MessageBoardListAdapter(var items: MutableList<MessageModel>) :
 
         when (items[position].message_type?.toInt()) {
             2 -> {
-                holder.message.visibility = View.GONE
                 holder.image.visibility = View.VISIBLE
+                holder.message.visibility = View.GONE
                 holder.image.loadFromURL(items[position].message)
             }
             else -> {
@@ -56,11 +57,6 @@ class MessageBoardListAdapter(var items: MutableList<MessageModel>) :
                 holder.image.visibility = View.GONE
             }
         }
-
-
-    }
-
-    fun handleMessage(holder: Holder, position: Int) {
 
     }
 
