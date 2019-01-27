@@ -5,12 +5,16 @@ import androidx.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_main_board.*
-import teymoori.red.story.R
 import teymoori.red.story.chatbaord.ChatBoardActivity
 import teymoori.red.story.utils.base.BaseActivity
 import teymoori.red.story.utils.base.RestHandler
 import teymoori.red.story.utils.entities.StoryModel
 import teymoori.red.story.utils.toastError
+import androidx.recyclerview.widget.GridLayoutManager
+import teymoori.red.story.R
+
+
+
 
 class MainBoardActivity : BaseActivity(), MainBoardListAdapter.StoryClickItem {
 
@@ -34,6 +38,17 @@ class MainBoardActivity : BaseActivity(), MainBoardListAdapter.StoryClickItem {
                     loading(false)
                     val adapter = it.data?.let { items -> MainBoardListAdapter(items) }
                     results.adapter = adapter
+
+                    val gridLayoutManager = GridLayoutManager(mContext, 2)
+                    gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                        override fun getSpanSize(position: Int): Int {
+                            return  (if (position % 5 == 0) 2 else 1)
+                        }
+
+                    }
+                    results.layoutManager = gridLayoutManager
+
+
                     adapter?.storyClickHandler = this
                 }
             }

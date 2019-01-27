@@ -28,7 +28,7 @@ class ChatBoardActivity : BaseActivity(), MessageBoardListAdapter.MessageClickIt
         val viewModel = ViewModelProviders.of(this).get(ChatBoardViewModel::class.java)
         observeMessages(viewModel, story.id)
         adapter = MessageBoardListAdapter(messages)
-
+        storyTitle.text = story.title
         results.addOnScrollListener(CustomScrollHandler())
         results.adapter = adapter
         results.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
@@ -41,6 +41,12 @@ class ChatBoardActivity : BaseActivity(), MessageBoardListAdapter.MessageClickIt
             }
 
         })
+        next.setOnClickListener {
+            addItem()
+        }
+        home.setOnClickListener {
+            finish()
+        }
     }
 
     private fun addItem() {
@@ -49,6 +55,11 @@ class ChatBoardActivity : BaseActivity(), MessageBoardListAdapter.MessageClickIt
             lastItemReleased++
             results.scrollToPosition(adapter.itemCount - 1)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        FullScreencall()
     }
 
     private fun observeMessages(viewModel: ChatBoardViewModel, story_id: String) {
