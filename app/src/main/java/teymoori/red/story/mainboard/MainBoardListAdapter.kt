@@ -8,11 +8,12 @@ import android.widget.ImageView
 import kotlinx.android.synthetic.main.stories_board_item.view.*
 import teymoori.red.story.R
 import teymoori.red.story.utils.customViews.MyTextView
+import teymoori.red.story.utils.entities.StoryEntity
 import teymoori.red.story.utils.entities.StoryModel
 import teymoori.red.story.utils.listen
 import teymoori.red.story.utils.loadFromURL
 
-class MainBoardListAdapter (val items: List<StoryModel>) : androidx.recyclerview.widget.RecyclerView.Adapter<MainBoardListAdapter.Holder>() {
+class MainBoardListAdapter (val items: List<StoryEntity>) : androidx.recyclerview.widget.RecyclerView.Adapter<MainBoardListAdapter.Holder>() {
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): Holder {
         return Holder(LayoutInflater.from(parent.context).inflate(R.layout.stories_board_item, parent, false))
             .listen { pos, _ ->
@@ -41,6 +42,6 @@ class MainBoardListAdapter (val items: List<StoryModel>) : androidx.recyclerview
     lateinit var storyClickHandler: StoryClickItem
 
     interface StoryClickItem {
-        fun onStorySelect(story: StoryModel)
+        fun onStorySelect(story: StoryEntity)
     }
 }

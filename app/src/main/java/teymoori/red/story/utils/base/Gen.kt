@@ -25,7 +25,8 @@ import java.io.IOException
 
 class Gen {
     companion object {
-        private const val BASE_URL = "http://devcast.ir/red/"
+    //    private const val BASE_URL = "http://devcast.ir/red/"
+        private const val BASE_URL = "http://192.168.0.100/index.php/api/"
         const val TOKEN_KEY = "token"
         const val USERNAME = "username"
         const val SERVER_ADDRESS = "server_address"

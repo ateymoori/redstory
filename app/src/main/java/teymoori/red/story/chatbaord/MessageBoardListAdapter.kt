@@ -1,6 +1,5 @@
 package teymoori.red.story.chatbaord
 
-import android.os.Handler
 import androidx.core.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
@@ -9,16 +8,13 @@ import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.message_item.view.*
 import teymoori.red.story.R
 import teymoori.red.story.utils.customViews.MyTextView
-import teymoori.red.story.utils.entities.MessageModel
 import android.view.Gravity
-import android.widget.ImageView
-import android.widget.RelativeLayout
 import com.makeramen.roundedimageview.RoundedImageView
 import teymoori.red.story.utils.base.MyApplication
+import teymoori.red.story.utils.entities.MessageEntity
 import teymoori.red.story.utils.loadFromURL
 
-
-class MessageBoardListAdapter(var items: MutableList<MessageModel>) :
+class MessageBoardListAdapter(var items: MutableList<MessageEntity>) :
     androidx.recyclerview.widget.RecyclerView.Adapter<MessageBoardListAdapter.Holder>() {
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): Holder {
         return Holder(LayoutInflater.from(parent.context).inflate(R.layout.message_item, parent, false))
@@ -27,7 +23,7 @@ class MessageBoardListAdapter(var items: MutableList<MessageModel>) :
 //            }
     }
 
-    fun addItem(item: MessageModel) {
+    fun addItem(item: MessageEntity) {
         items.add(item)
         notifyDataSetChanged()
     }
@@ -64,7 +60,6 @@ class MessageBoardListAdapter(var items: MutableList<MessageModel>) :
         return items.size
     }
 
-
     class Holder(private val view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
         val message: MyTextView = view.message
         val sender: MyTextView = view.sender
@@ -76,6 +71,6 @@ class MessageBoardListAdapter(var items: MutableList<MessageModel>) :
     lateinit var messageClickHandler: MessageClickItem
 
     interface MessageClickItem {
-        fun onMessageSelect(story: MessageModel)
+        fun onMessageSelect(story: MessageEntity)
     }
 }

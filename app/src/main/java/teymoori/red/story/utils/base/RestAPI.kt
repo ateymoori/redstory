@@ -4,18 +4,18 @@ package teymoori.red.story.utils.base
 import io.reactivex.Observable
 import retrofit2.Response
 import retrofit2.http.*
-import teymoori.red.story.utils.entities.MessageModel
-import teymoori.red.story.utils.entities.StoryModel
+import teymoori.red.story.utils.entities.MessagesResponseModel
+import teymoori.red.story.utils.entities.StoryResponseModel
 
 interface RestAPI {
 
-    @GET("stories.php")
+    @GET("stories")
     fun getStories():
-            Observable<Response<List<StoryModel>>>
+            Observable<Response<StoryResponseModel>>
 
-    @GET("messages.php")
-    fun getMessages(@Query("story_id") story_id: String):
-            Observable<Response<MutableList<MessageModel>>>
+    @GET("messages")
+    fun getMessages(@Query("story") id: Int):
+            Observable<Response<MessagesResponseModel>>
 
 
 }

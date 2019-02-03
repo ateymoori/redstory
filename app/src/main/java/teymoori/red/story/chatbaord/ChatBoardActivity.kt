@@ -6,18 +6,20 @@ import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_chat_board.*
 import teymoori.red.story.R
 import teymoori.red.story.utils.base.BaseActivity
-import teymoori.red.story.utils.entities.MessageModel
 import teymoori.red.story.utils.entities.StoryModel
 import teymoori.red.story.utils.loadFromURL
 import android.view.MotionEvent
 import androidx.recyclerview.widget.RecyclerView
 import teymoori.red.story.utils.base.RestHandler
+import teymoori.red.story.utils.entities.MessageEntity
+import teymoori.red.story.utils.entities.StoryEntity
 import teymoori.red.story.utils.toastError
+import java.util.*
 
 class ChatBoardActivity : BaseActivity(), MessageBoardListAdapter.MessageClickItem {
-    lateinit var story: StoryModel
+    lateinit var story: StoryEntity
     private lateinit var adapter: MessageBoardListAdapter
-    private var messages: MutableList<MessageModel> = mutableListOf()
+    private var messages: MutableList<MessageEntity> = mutableListOf()
     private var lastItemReleased = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,8 +30,8 @@ class ChatBoardActivity : BaseActivity(), MessageBoardListAdapter.MessageClickIt
         bg.loadFromURL(story.background)
         val viewModel = ViewModelProviders.of(this).get(ChatBoardViewModel::class.java)
 
-        observeMessages(viewModel, "1")
-      //  observeMessages(viewModel, story.id)
+        observeMessages(viewModel, story.id)
+        //  observeMessages(viewModel, story.id)
 
         adapter = MessageBoardListAdapter(messages)
         storyTitle.text = story.title
@@ -66,7 +68,7 @@ class ChatBoardActivity : BaseActivity(), MessageBoardListAdapter.MessageClickIt
         FullScreencall()
     }
 
-    private fun observeMessages(viewModel: ChatBoardViewModel, story_id: String) {
+    private fun observeMessages(viewModel: ChatBoardViewModel, story_id: Int) {
         viewModel.getMessages(story_id).observe(this, Observer {
             when (it?.status) {
                 RestHandler.Status.LOADING -> loading(true)
@@ -77,6 +79,7 @@ class ChatBoardActivity : BaseActivity(), MessageBoardListAdapter.MessageClickIt
                 RestHandler.Status.SUCCESS -> {
                     loading(false)
                     messages = it.data!!
+                    messages.reverse()
                     addItem()
                 }
             }
@@ -102,7 +105,7 @@ class ChatBoardActivity : BaseActivity(), MessageBoardListAdapter.MessageClickIt
         }
     }
 
-    override fun onMessageSelect(story: MessageModel) {
+    override fun onMessageSelect(story: MessageEntity) {
         // addItem()
     }
 }

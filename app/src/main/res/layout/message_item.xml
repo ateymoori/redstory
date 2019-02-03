@@ -26,7 +26,7 @@
 
             <teymoori.red.story.utils.customViews.MyTextView
                     android:layout_width="wrap_content"
-                    android:gravity="center"
+                    android:gravity="center|start"
                     android:background="@drawable/rounded_green"
                     android:id="@+id/message"
                     android:textColor="@color/white"

@@ -12,6 +12,8 @@ import teymoori.red.story.utils.entities.StoryModel
 import teymoori.red.story.utils.toastError
 import androidx.recyclerview.widget.GridLayoutManager
 import teymoori.red.story.R
+import teymoori.red.story.storyintroduction.IntroduceActivity
+import teymoori.red.story.utils.entities.StoryEntity
 
 
 class MainBoardActivity : BaseActivity(), MainBoardListAdapter.StoryClickItem {
@@ -58,8 +60,8 @@ class MainBoardActivity : BaseActivity(), MainBoardListAdapter.StoryClickItem {
 
     }
 
-    override fun onStorySelect(story: StoryModel) {
-        val intentMessages = Intent(mActivity, ChatBoardActivity::class.java).putExtra("story", story)
+    override fun onStorySelect(story: StoryEntity) {
+        val intentMessages = Intent(mActivity, IntroduceActivity::class.java).putExtra("story", story)
         startActivity(intentMessages)
     }
 }

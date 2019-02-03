@@ -6,7 +6,8 @@
         android:id="@+id/container"
         android:fitsSystemWindows="true"
         android:layout_width="match_parent"
-        android:clickable="true" android:layout_height="match_parent"
+        android:clickable="true"
+        android:layout_height="match_parent"
         tools:context=".chatbaord.ChatBoardActivity">
 
     <ImageView
@@ -21,6 +22,7 @@
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/results"
             android:layout_width="match_parent"
+            android:layoutAnimation="@anim/list_anim"
             android:clipToPadding="true"
             android:orientation="vertical"
             android:layout_marginTop="44dp"
